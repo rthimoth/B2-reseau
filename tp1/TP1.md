@@ -310,7 +310,9 @@ un 3-way handshake
 un peu de trafic
 la fin de la connexion TCP
 
-
+```
+filtre utilisé 'tcp'
+```
 
 
 Si vous utilisez un filtre Wireshark pour mieux voir ce trafic, précisez-le moi dans le compte-rendu.
