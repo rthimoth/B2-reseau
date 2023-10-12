@@ -294,6 +294,9 @@ vous effectuerez la requête DNS en ligne de commande
 
 Si vous utilisez un filtre Wireshark pour mieux voir ce trafic, précisez-le moi dans le compte-rendu.
 
+```
+filtre utilisé dans wireshark 'dns'
+```
 
 ☀️ Capture TCP
 
