@@ -165,8 +165,42 @@ Compte-rendu
 ☀️ Sur node1.lan1.tp1
 
 afficher ses cartes réseau
+```
+[ranvin@node1 ~]$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:c1:95:7d brd ff:ff:ff:ff:ff:ff
+    inet 10.1.1.11/24 brd 10.1.1.255 scope global noprefixroute enp0s3
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a00:27ff:fec1:957d/64 scope link
+       valid_lft forever preferred_lft forever
+```
 afficher sa table de routage
+```
+[ranvin@node1 ~]$ ip neigh show
+10.1.1.1 dev enp0s3 lladdr 0a:00:27:00:00:12 REACHABLE
+```
 prouvez qu'il peut joindre node2.lan2.tp2
+
+```
+[ranvin@node1 ~]$ ping 10.1.2.12
+PING 10.1.2.12 (10.1.2.12) 56(84) bytes of data.
+64 bytes from 10.1.2.12: icmp_seq=1 ttl=63 time=1.89 ms
+64 bytes from 10.1.2.12: icmp_seq=2 ttl=63 time=1.15 ms
+64 bytes from 10.1.2.12: icmp_seq=3 ttl=63 time=1.02 ms
+64 bytes from 10.1.2.12: icmp_seq=4 ttl=63 time=1.21 ms
+64 bytes from 10.1.2.12: icmp_seq=5 ttl=63 time=1.07 ms
+64 bytes from 10.1.2.12: icmp_seq=6 ttl=63 time=0.970 ms
+^C
+--- 10.1.2.12 ping statistics ---
+6 packets transmitted, 6 received, 0% packet loss, time 5009ms
+rtt min/avg/max/mdev = 0.970/1.218/1.890/0.310 ms
+```
 
 prouvez avec un traceroute que le paquet passe bien par router.tp1
 
