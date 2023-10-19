@@ -205,6 +205,12 @@ rtt min/avg/max/mdev = 0.970/1.218/1.890/0.310 ms
 
 prouvez avec un traceroute que le paquet passe bien par router.tp1
 
+```
+[ranvin@node1 ~]$ traceroute -m 10 10.1.2.12
+traceroute to 10.1.2.12 (10.1.2.12), 10 hops max, 60 byte packets
+ 1  10.1.1.254 (10.1.1.254)  0.914 ms  0.895 ms  0.882 ms
+ 2  10.1.2.12 (10.1.2.12)  0.869 ms !X  1.989 ms !X  1.971 ms !X
+```
 
 
 II. Interlude accès internet
