@@ -182,8 +182,9 @@ afficher ses cartes réseau
 ```
 afficher sa table de routage
 ```
-[ranvin@node1 ~]$ ip neigh show
-10.1.1.1 dev enp0s3 lladdr 0a:00:27:00:00:12 REACHABLE
+[ranvin@node1 ~]$ ip route show
+10.1.1.0/24 dev enp0s3 proto kernel scope link src 10.1.1.11 metric 100
+10.1.2.0/24 via 10.1.1.254 dev enp0s3 proto static metric 100
 ```
 prouvez qu'il peut joindre node2.lan2.tp2
 
