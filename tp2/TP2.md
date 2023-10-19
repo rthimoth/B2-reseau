@@ -181,6 +181,28 @@ Ajoutez une carte NAT au routeur pour qu'il ait un accès internet.
 prouvez que vous avez un accès internet (ping d'une IP publique)
 prouvez que vous pouvez résoudre des noms publics (ping d'un nom de domaine public)
 
+```
+[ranvin@router ~]$ ping 8.8.8.8
+PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=108 time=28.7 ms
+64 bytes from 8.8.8.8: icmp_seq=2 ttl=108 time=29.4 ms
+64 bytes from 8.8.8.8: icmp_seq=3 ttl=108 time=34.6 ms
+64 bytes from 8.8.8.8: icmp_seq=4 ttl=108 time=28.7 ms
+^C
+--- 8.8.8.8 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3005ms
+rtt min/avg/max/mdev = 28.690/30.335/34.572/2.460 ms
+[ranvin@router ~]$ ping www.ynov.com
+PING www.ynov.com (104.26.10.233) 56(84) bytes of data.
+64 bytes from 104.26.10.233 (104.26.10.233): icmp_seq=1 ttl=54 time=31.3 ms
+64 bytes from 104.26.10.233 (104.26.10.233): icmp_seq=2 ttl=54 time=25.2 ms
+64 bytes from 104.26.10.233 (104.26.10.233): icmp_seq=3 ttl=54 time=32.6 ms
+^C
+--- www.ynov.com ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2003ms
+rtt min/avg/max/mdev = 25.173/29.684/32.552/3.228 ms
+```
+
 ☀️ Accès internet LAN1 et LAN2
 
 ajoutez une route par défaut sur les deux machines du LAN1
