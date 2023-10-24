@@ -247,15 +247,67 @@ rtt min/avg/max/mdev = 25.173/29.684/32.552/3.228 ms
 ☀️ Accès internet LAN1 et LAN2
 
 ajoutez une route par défaut sur les deux machines du LAN1
+```
+[ranvin@Node2 network-scripts]$ cat route-enp0s3
+10.1.2.0/24 via 10.1.1.254 dev enp0s3
+```
 ajoutez une route par défaut sur les deux machines du LAN2
+
+```
+[ranvin@node2 network-scripts]$ cat route-enp0s3
+10.1.1.0/24 via 10.1.2.254 dev enp0s3
+```
+
 configurez l'adresse d'un serveur DNS que vos machines peuvent utiliser pour résoudre des noms
 dans le compte-rendu, mettez-moi que la conf des points précédents sur node2.lan1.tp1
+
+```
+[ranvin@Node2 network-scripts]$ hostname
+Node2.lan1.tp2
+[ranvin@Node2 network-scripts]$ cat route-enp0s3
+10.1.2.0/24 via 10.1.1.254 dev enp0s3
+[ranvin@Node2 network-scripts]$ cat ifcfg-enp0s3
+DEVICE=enp0s3
+BOOTPROTO=static
+ONBOOT=yes
+
+IPADDR=10.1.1.12
+NETMASK=255.255.255.0
+
+GATEWAY=10.1.1.254
+DNS1=1.1.1.1
+```
+
 
 prouvez que node2.lan1.tp1 a un accès internet :
 
 il peut ping une IP publique
+
+```
+[ranvin@Node2 network-scripts]$ ping 8.8.8.8
+PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=113 time=17.7 ms
+64 bytes from 8.8.8.8: icmp_seq=2 ttl=113 time=16.3 ms
+64 bytes from 8.8.8.8: icmp_seq=3 ttl=113 time=16.7 ms
+^C
+--- 8.8.8.8 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2004ms
+rtt min/avg/max/mdev = 16.277/16.867/17.654/0.579 ms
+```
+
 il peut ping un nom de domaine public
 
+```
+[ranvin@Node2 network-scripts]$ ping www.ynov.com
+PING www.ynov.com (104.26.10.233) 56(84) bytes of data.
+64 bytes from 104.26.10.233 (104.26.10.233): icmp_seq=1 ttl=55 time=11.8 ms
+64 bytes from 104.26.10.233 (104.26.10.233): icmp_seq=2 ttl=55 time=12.6 ms
+64 bytes from 104.26.10.233 (104.26.10.233): icmp_seq=3 ttl=55 time=12.2 ms
+^C
+--- www.ynov.com ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2004ms
+rtt min/avg/max/mdev = 11.788/12.204/12.579/0.324 ms
+```
 
 
 
@@ -295,11 +347,72 @@ commande d'installation du paquet
 fichier de conf
 service actif
 
+```
+sudo dnf install -y dhcp-server
+```
 
+```
+[ranvin@dhcp /]$ sudo cat /etc/dhcp/dhcpd.conf
+[sudo] password for ranvin:
+# specify domain name
+option domain-name "srv.world";
+# specify DNS server's hostname or IP address
+option domain-name-servers dlp.srv.world;
+
+# default lease time
+default-lease-time 600;
+# max lease time
+max-lease-time 7200;
+
+# this DHCP server to be declared valid
+authoritative;
+
+# specify network address and subnetmask
+subnet 10.1.1.0 netmask 255.255.255.0 {
+    # specify the range of lease IP addresses
+    range 10.1.1.100 10.1.1.200;
+
+    # specify gateway (router)
+    option routers 10.1.1.254;  # Gateway IP address
+
+    # specify DNS server
+    option domain-name-servers 1.1.1.1;  # DNS server IP address
+    option broadcast-address 10.1.1.255;
+```
+
+```
+[ranvin@dhcp ~]$ sudo systemctl status dhcpd.service
+● dhcpd.service - DHCPv4 Server Daemon
+     Loaded: loaded (/usr/lib/systemd/system/dhcpd.service; enabled; preset: disabled)
+     Active: active (running) since Tue 2023-10-24 11:20:14 CEST; 9min ago
+       Docs: man:dhcpd(8)
+             man:dhcpd.conf(5)
+   Main PID: 1112 (dhcpd)
+     Status: "Dispatching packets..."
+      Tasks: 1 (limit: 4611)
+     Memory: 7.0M
+        CPU: 7ms
+     CGroup: /system.slice/dhcpd.service
+             └─1112 /usr/sbin/dhcpd -f -cf /etc/dhcp/dhcpd.conf -user dhcpd -group dhcpd --no-pid
+
+Oct 24 11:20:14 dhcp.lan1.tp2 dhcpd[1112]: Config file: /etc/dhcp/dhcpd.conf
+Oct 24 11:20:14 dhcp.lan1.tp2 dhcpd[1112]: Database file: /var/lib/dhcpd/dhcpd.leases
+Oct 24 11:20:14 dhcp.lan1.tp2 dhcpd[1112]: PID file: /var/run/dhcpd.pid
+Oct 24 11:20:14 dhcp.lan1.tp2 dhcpd[1112]: Source compiled to use binary-leases
+Oct 24 11:20:14 dhcp.lan1.tp2 dhcpd[1112]: Wrote 0 leases to leases file.
+Oct 24 11:20:14 dhcp.lan1.tp2 dhcpd[1112]: Listening on LPF/enp0s3/08:00:27:a7:60:d9/10.1.1.0/24
+Oct 24 11:20:14 dhcp.lan1.tp2 dhcpd[1112]: Sending on   LPF/enp0s3/08:00:27:a7:60:d9/10.1.1.0/24
+Oct 24 11:20:14 dhcp.lan1.tp2 dhcpd[1112]: Sending on   Socket/fallback/fallback-net
+Oct 24 11:20:14 dhcp.lan1.tp2 dhcpd[1112]: Server starting service.
+Oct 24 11:20:14 dhcp.lan1.tp2 systemd[1]: Started DHCPv4 Server Daemon.
+```
 
 ☀️ Sur node1.lan1.tp1
 
 demandez une IP au serveur DHCP
+```
+[ranvin@node1 network-scripts]$ dnf -y install dhcp-client
+```
 prouvez que vous avez bien récupéré une IP via le DHCP
 prouvez que vous avez bien récupéré l'IP de la passerelle
 prouvez que vous pouvez ping node1.lan2.tp1
