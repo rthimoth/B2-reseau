@@ -504,6 +504,13 @@ configuration NGINX
 
 service actif
 ouverture du port firewall
+
+```
+sudo firewall-cmd --zone=public --add-port=80/tcp --permanent
+sudo firewall-cmd --reload
+```
+
+
 ```
 [ranvin@node2 conf.d]$ sudo systemctl status httpd
 ● httpd.service - The Apache HTTP Server
