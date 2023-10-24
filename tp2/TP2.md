@@ -495,7 +495,11 @@ gestion de la racine web /var/www/site_nul/
 configuration NGINX
 
 ```
-
+[ranvin@node2 conf.d]$ sudo cat site_nul_.conf
+<VirtualHost *:80>
+    ServerName site_nul.tp2
+    DocumentRoot /var/www/site_nul/
+</VirtualHost>
 ```
 
 service actif
