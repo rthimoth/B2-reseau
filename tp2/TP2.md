@@ -492,6 +492,11 @@ setup du service Web
 installation de NGINX
 gestion de la racine web /var/www/site_nul/
 
+```
+[ranvin@node2 conf.d]$ sudo mkdir -p /var/www/site_nul/
+[ranvin@node2 conf.d]$ sudo chown -R apache:apache /var/www/site_nul
+```
+
 configuration NGINX
 
 ```
@@ -528,8 +533,36 @@ LISTEN 0      511                *:80               *:*    users:(("httpd",pid=8
 
 prouvez que le firewall est bien configuré
 
+```
+[ranvin@node2 conf.d]$ sudo firewall-cmd --list-all
+public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: enp0s3
+  sources:
+  services: cockpit dhcpv6-client http ssh
+  ports: 22/tcp 26848/tcp 8888/tcp 26993/tcp 3306/tcp 80/tcp
+  protocols:
+  forward: yes
+  masquerade: yes
+  forward-ports:
+  source-ports:
+  icmp-blocks:
+  rich rules:
+```
+
 ☀️ Sur node1.lan1.tp1
 
 éditez le fichier hosts pour que site_nul.tp1 pointe vers l'IP de web.lan2.tp1
 
+```
+[ranvin@node1 ~]$ sudo cat /etc/hosts | grep site
+10.1.2.12   site_nul.tp2
+```
+
 visitez le site nul avec une commande curl et en utilisant le nom site_nul.tp1
+
+```
+[ranvin@node1 ~]$ curl site_nul.tp2
+Bienvenue sur site_nul.tp2 !
+```
