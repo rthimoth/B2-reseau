@@ -493,11 +493,28 @@ installation de NGINX
 gestion de la racine web /var/www/site_nul/
 
 configuration NGINX
+
+```
+
+```
+
 service actif
 ouverture du port firewall
+```
+[ranvin@node2 conf.d]$ sudo systemctl status httpd
+● httpd.service - The Apache HTTP Server
+     Loaded: loaded (/usr/lib/systemd/system/httpd.service; enabled; preset: disabled)
+Oct 24 09:19:13 node2.lan2 httpd[698]: Server configured, listening on: port 80
+```
 
 
 prouvez qu'il y a un programme NGINX qui tourne derrière le port 80 de la machine (commande ss)
+
+```
+[ranvin@node2 conf.d]$ sudo ss -ltnp | grep :80
+LISTEN 0      511                *:80               *:*    users:(("httpd",pid=879,fd=4),("httpd",pid=767,fd=4),("httpd",pid=766,fd=4),("httpd",pid=698,fd=4))
+```
+
 prouvez que le firewall est bien configuré
 
 ☀️ Sur node1.lan1.tp1
