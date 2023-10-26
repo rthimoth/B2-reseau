@@ -20,13 +20,15 @@ Déterminer...
 l'adresse MAC de votre carte WiFi 
 
 ```
-ipconfig /all  4C-03-4F-E7-6A-FD
+ipconfig /all  
+Adresse physique  4C-03-4F-E7-6A-FD
 ```
 
 l'adresse IP de votre carte WiFi
 
 ``` 
-ipconfig /all 10.33.76.204
+ipconfig /all 
+Adresse IPv4. 10.33.76.204
 ```
 
 le masque de sous-réseau du réseau LAN auquel vous êtes connectés en WiFi
