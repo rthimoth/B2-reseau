@@ -152,6 +152,11 @@ Durée approximative des boucles en millisecondes :
     Minimum = 14ms, Maximum = 15ms, Moyenne = 14ms
 ```
 
+```
+PS C:\Users\Timot> Get-Content C:\Windows\System32\drivers\etc\hosts | Select-Object -Last 2
+1.1.1.1 b2.hello.vous
+```
+
 
 ☀️ Go mater une vidéo youtube et déterminer, pendant qu'elle tourne...
 
