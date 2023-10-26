@@ -288,8 +288,9 @@ capturez un échange ARP entre votre PC et la passerelle du réseau
 
 Si vous utilisez un filtre Wireshark pour mieux voir ce trafic, précisez-le moi dans le compte-rendu.
 
-```
+
 [lien vers capture ARP](./testarp.pcap)
+```
 filtre wireshark utilisé 'arp'
 
 ```
@@ -305,8 +306,9 @@ vous effectuerez la requête DNS en ligne de commande
 
 Si vous utilisez un filtre Wireshark pour mieux voir ce trafic, précisez-le moi dans le compte-rendu.
 
-```
+
 [lien vers capture ARP](./dns3.pcap)
+```
 filtre utilisé dans wireshark 'dns'
 ```
 
@@ -322,8 +324,9 @@ un 3-way handshake
 un peu de trafic
 la fin de la connexion TCP
 
-```
+
 [lien vers capture ARP](./tcpparfait.pcapng)
+```
 filtre utilisé 'tcp'
 ```
 
