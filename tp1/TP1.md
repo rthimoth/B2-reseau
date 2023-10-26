@@ -219,6 +219,16 @@ Déterminer...
 
 l'adresse IP publique de la passerelle du réseau (le routeur d'YNOV donc si vous êtes dans les locaux d'YNOV quand vous faites le TP)
 
+```
+PS C:\Users\Timot> nslookup myip.opendns.com resolver1.opendns.com
+Serveur :   dns.opendns.com
+Address:  208.67.222.222
+
+Réponse ne faisant pas autorité :
+Nom :    myip.opendns.com
+Address:  77.147.51.5
+```
+
 
 ☀️ Scan réseau
 Déterminer...
