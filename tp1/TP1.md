@@ -82,6 +82,8 @@ l'adresse IP de la passerelle du réseau
 ```
 ipconfig /all 
 10.33.79.254
+
+je suis pas sur de ce que j'avais fait je l'ai donc refait chez moi  Passerelle par défaut. . . . . . . . . : 192.168.1.1
 ```
 
 l'adresse MAC de la passerelle du réseau
@@ -89,6 +91,13 @@ l'adresse MAC de la passerelle du réseau
 ```
 ipconfig /all 
 4C-03-4F-E7-6A-FD
+
+Ici pareil j'ai refait pour être sur de ma réponse
+PS C:\Users\Timot> arp -a
+
+Interface : 192.168.1.39 --- 0xd
+  Adresse Internet      Adresse physique      Type
+  192.168.1.1           44-ce-7d-f3-ae-b0     dynamique
 ```
 
 ☀️ Serveur DHCP et DNS
