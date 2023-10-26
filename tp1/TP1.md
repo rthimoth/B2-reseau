@@ -53,7 +53,7 @@ Pas besoin d'un terminal là, juste une feuille, ou votre tête, ou un tool qui 
 l'adresse de réseau du LAN auquel vous êtes connectés en WiFi
 
 ```
-https://www.site24x7.com/fr/tools/ipv4-sous-reseau-calculatrice.html Je pense qu'il est super 4096
+https://www.site24x7.com/fr/tools/ipv4-sous-reseau-calculatrice.html Je pense qu'il est super :D     4096
 ```
 
 l'adresse de broadcast
@@ -68,7 +68,8 @@ le nombre d'adresses IP disponibles dans ce réseau
 déterminer le hostname de votre PC
 
 ```
-hostname Timo
+PS C:\Users\Timot> hostname
+Timo
 ```
 
 ☀️ Passerelle du réseau
