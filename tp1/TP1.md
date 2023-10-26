@@ -307,7 +307,7 @@ vous effectuerez la requête DNS en ligne de commande
 Si vous utilisez un filtre Wireshark pour mieux voir ce trafic, précisez-le moi dans le compte-rendu.
 
 
-[lien vers capture ARP](./dns3.pcap)
+[lien vers capture DNS](./dns3.pcap)
 ```
 filtre utilisé dans wireshark 'dns'
 ```
@@ -325,7 +325,7 @@ un peu de trafic
 la fin de la connexion TCP
 
 
-[lien vers capture ARP](./tcpparfait.pcapng)
+[lien vers capture TCP](./tcpparfait.pcapng)
 ```
 filtre utilisé 'tcp'
 ```
