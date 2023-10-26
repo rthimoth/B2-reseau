@@ -60,8 +60,8 @@ l'adresse de broadcast
 le nombre d'adresses IP disponibles dans ce réseau
 
 ```
- ipconfig 10.33.79.255
- ```
+ ipconfig 10.33.79.255  on a donc 254 ip possible 
+```
 
 ☀️ Hostname
 
@@ -96,7 +96,7 @@ l'adresse IP du serveur DHCP qui vous a filé une IP
 
 ``` 
 ipconfig /all 
-10.33.79.254
+passerelle par défaut 10.33.79.254
 ```
 
 l'adresse IP du serveur DNS que vous utilisez quand vous allez sur internet
