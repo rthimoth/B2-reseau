@@ -62,7 +62,7 @@ l'adresse de broadcast
 le nombre d'adresses IP disponibles dans ce réseau
 
 ```
- ipconfig 10.33.79.255  on a donc 254 ip possible 
+ ipconfig 10.33.79.255  on a donc 254 ip possible dans le sous réseau et 4094 dans le réseau total comme il y en 2 qui seront utilisé de base
 ```
 
 ☀️ Hostname
