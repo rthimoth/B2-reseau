@@ -83,7 +83,8 @@ l'adresse IP de la passerelle du réseau
 ipconfig /all 
 10.33.79.254
 
-je suis pas sur de ce que j'avais fait je l'ai donc refait chez moi  Passerelle par défaut. . . . . . . . . : 192.168.1.1
+je suis pas sur de ce que j'avais fait pour la mac j'ai repris les 2 reponses de chez moi du coup
+  Passerelle par défaut. . . . . . . . . : 192.168.1.1
 ```
 
 l'adresse MAC de la passerelle du réseau
