@@ -1,0 +1,44 @@
+finally:  # Cette ligne doit être au même niveau d'indentation que 'try' et 'except'
+    # On libère le socket TCP
+    s.close()
+    sys.exit(0)
+
+    permet de fermer le programme proprement
+
+
+
+except Exception as e:  # Cette ligne doit être au même niveau d'indentation que 'try'
+    print(f"Une erreur est survenue: {e}")
+    sys.exit(1)  # Se termine avec un code d'erreur car une exception s'est produite
+
+except permet de print un code erreur 
+
+
+
+input sert a posé une question a un utilisateur
+
+
+
+data = s.recv(1024).decode('utf-8')
+print(f"Le serveur a répondu : {data}")
+En utilisant decode('utf-8'), vous convertissez les données brutes reçues du serveur 
+(qui sont en bytes) en une chaîne de caractères (str) en utilisant l'encodage UTF-8, 
+ce qui est l'encodage standard pour le texte en Python 3. Cela devrait afficher correctement les caractères accentués.
+
+
+Les exceptions TypeError et ValueError sont utilisées pour indiquer
+respectivement que le type de l'input n'est pas une chaîne ou que la condition de contenu n'est pas remplie
+
+
+
+ # Vérification que la string contient "waf" ou "meo"
+    if not re.search(r"waf|meo", message):
+        raise ValueError("Le message doit contenir le mot 'waf' ou 'meo'.")
+
+re = regex = verification des données voulu est d'autre possiblilité
+
+
+
+L'instruction raise en Python est utilisée pour déclencher une exception. Vous pouvez spécifier quel type d'exception lever, et ceci
+ interrompt le flux normal du programme. L'exception peut ensuite être capturée et gérée 
+par un bloc try...except, permettant au programme de réagir de manière appropriée à différentes erreurs ou conditions exceptionnelles.
