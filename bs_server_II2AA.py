@@ -78,3 +78,26 @@ while True:
     if datetime.now() - last_client_time > timedelta(minutes=1):
         logger.warning("Aucun client depuis plus de une minute.")
         last_client_time = datetime.now()
+
+
+
+
+last_connection_time = time.time()
+
+def check_connections():
+    global last_connection_time
+    while True:
+        time.sleep(60)  # Attendre une minute
+        if time.time() - last_connection_time > 60:
+            logging.warning("Aucun client depuis plus de une minute.")
+            print("\033[93m" + "WARN" + "\033[0m", "Aucun client depuis plus de une minute.")
+
+# Démarrer le thread de vérification des connexions
+threading.Thread(target=check_connections, daemon=True).start()
+
+s.listen(1)
+
+
+while True:
+
+  last_connection_time = time.time()

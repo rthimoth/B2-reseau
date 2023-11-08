@@ -4,7 +4,7 @@ import sys
 import re
 
 # Configuration du logger
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("bs_client")
 logger.setLevel(logging.INFO)
 
 # Chemin vers le fichier de log du client
@@ -17,6 +17,16 @@ formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s', datefmt='
 file_handler = logging.FileHandler(log_file_path)
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
+
+class ErrorFilter(logging.Filter):
+    def filter(self, record):
+        return record.levelname == 'ERROR'
+
+console_handler = logging.StreamHandler()
+console_handler.addFilter(ErrorFilter())
+error_formatter = logging.Formatter('\033[91mERROR: %(message)s\033[0m')  # ANSI escape codes for red text
+console_handler.setFormatter(error_formatter)
+logger.addHandler(console_handler)
 
 # On définit la destination de la connexion
 host = '10.1.2.12'  # IP du serveur
@@ -53,7 +63,7 @@ except (TypeError, ValueError) as e:
     sys.exit(1)
 
 except Exception as e:  # Pour les autres exceptions éventuelles
-    logger.error(f"Une erreur est survenue: {e}")
+    logger.error(f"Impossible de se connecter au serveur {host} sur le port {port}.")
     sys.exit(1)
 
 finally:
