@@ -39,6 +39,150 @@ re = regex = verification des données voulu est d'autre possiblilité
 
 
 
+
+
 L'instruction raise en Python est utilisée pour déclencher une exception. Vous pouvez spécifier quel type d'exception lever, et ceci
  interrompt le flux normal du programme. L'exception peut ensuite être capturée et gérée 
 par un bloc try...except, permettant au programme de réagir de manière appropriée à différentes erreurs ou conditions exceptionnelles.
+
+
+
+
+
+L'appel de la fonction sys.exit() en Python provoque l'arrêt du script Python en cours. 
+L'argument passé à cette fonction détermine le code de sortie (ou code de statut de sortie) du processus, 
+qui est un indicateur pour le système d'exploitation sur la manière dont le programme s'est terminé.
+
+Le code de sortie a les significations suivantes :
+
+sys.exit(0) : Le 0 signifie que le programme s'est terminé sans erreur. 
+C'est un code de succès standard dans de nombreux systèmes d'exploitation.
+
+sys.exit(2) ou tout autre entier différent de zéro : Cela signifie que le programme a rencontré une erreur 
+ou a été terminé dans des circonstances anormales ou spécifiques. Les codes autres que zéro sont généralement 
+*utilisés pour signaler une erreur ou une condition spécifique à laquelle un script ou un programme a été confronté avant de s'arrêter.
+
+
+
+
+
+Le module argparse est une bibliothèque standard de Python utilisée pour
+ faciliter l'écriture d'interfaces en ligne de commande conviviales. 
+Son rôle principal est de traiter les arguments que vous pouvez passer à vos scripts Python depuis la ligne de commande.
+
+Voici quelques-unes des fonctionnalités clés d'argparse et pourquoi il est utile :
+
+Analyse des Arguments de la Ligne de Commande :
+argparse permet de spécifier quels arguments de la ligne de commande un programme est prêt à accepter. 
+Il peut prendre des arguments positionnels ainsi que des arguments optionnels (souvent précédés de - ou --).
+
+Conversion des Types :
+Il convertit automatiquement les arguments de ligne de commande en types de données Python. Par exemple, 
+si un argument de ligne de commande doit être un entier, argparse tentera de convertir la valeur donnée en int.
+
+Génération de Messages d'Aide :
+En utilisant -h ou --help, argparse génère automatiquement un message d'aide qui affiche une description 
+des arguments que le script accepte, ainsi que de brefs messages d'aide définis pour chaque argument.
+
+Validation des Valeurs :
+argparse peut vérifier que les arguments fournis sont valides, en respectant les contraintes définies 
+(par exemple, vérifier que le numéro de port est dans la plage autorisée).
+
+Gestion des Arguments Optionnels :
+Vous pouvez définir des arguments qui ne sont pas obligatoires. Si un argument optionnel n'est pas fourni, 
+vous pouvez définir une valeur par défaut qui sera utilisée.
+
+Gestion des Sous-Commandes :
+argparse peut facilement gérer des sous-commandes, ce qui est utile pour les programmes qui doivent traiter un ensemble 
+de commandes avec leurs propres arguments spécifiques, comme les outils de versionnement git ou svn.
+
+Gestion des Erreurs :
+Si les arguments fournis ne respectent pas les règles définies ou sont manquants, argparse informe l'utilisateur de 
+l'erreur et termine le programme.
+
+import argparse
+
+# Création de l'analyseur d'arguments
+parser = argparse.ArgumentParser(description='Description de votre programme.')
+# Ajout d'un argument positionnel
+parser.add_argument('echo', help='Description de l\'argument echo.')
+# Ajout d'un argument optionnel avec une valeur par défaut
+parser.add_argument('--verbosity', help='Augmente le niveau de verbosité.', action='store_true')
+# Analyse des arguments de la ligne de commande
+args = parser.parse_args()
+
+# Utilisation des arguments
+if args.verbosity:
+    print(f"Verbosity turned on. Argument echo: {args.echo}")
+else:
+    print(args.echo)
+
+
+
+
+Bien sûr, examinons chaque ligne de la configuration de logging que vous avez fournie et décrivons ce que chacune fait :
+
+Obtention du Logger :
+
+python
+Copy code
+logger = logging.getLogger(__name__)
+Cette ligne récupère ou crée un objet logger avec le nom du module actuel (défini par la variable __name__). Chaque module (fichier .py) peut avoir son propre logger avec son propre nom, ce qui permet de suivre d'où viennent les messages de log.
+
+Définition du Niveau de Log :
+
+python
+Copy code
+logger.setLevel(logging.INFO)
+Ici, vous définissez le niveau de log du logger. logging.INFO signifie que le logger enregistrera tous les messages de niveau INFO et plus grave (WARNING, ERROR, etc.), mais pas les messages de niveau DEBUG.
+
+Configuration du Formatter :
+
+python
+Copy code
+formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+Un formatter est un objet qui définit la structure des messages de log. %(asctime)s, %(levelname)s, et %(message)s sont des attributs qui seront remplacés par le timestamp du log, le niveau de log, et le message de log réel, respectivement. Le datefmt spécifie le format de la date et de l'heure.
+
+Handler pour les Fichiers de Log :
+
+python
+Copy code
+file_handler = logging.handlers.RotatingFileHandler('/var/log/bs_server/bs_server.log', maxBytes=10000, backupCount=1)
+Un RotatingFileHandler est un handler de log qui écrit les logs dans un fichier et les "tourne" (c'est-à-dire crée un nouveau fichier) lorsque le fichier actuel atteint une certaine taille (ici maxBytes=10000, ce qui équivaut à environ 10KB). backupCount=1 indique que seul un fichier de backup sera conservé. Si un fichier de log bs_server.log est plein, il sera renommé et un nouveau fichier bs_server.log sera créé pour les logs suivants.
+
+Configuration du Formatter pour le Handler de Fichiers :
+
+python
+Copy code
+file_handler.setFormatter(formatter)
+Cette ligne applique le formatter que vous avez créé à file_handler, donc les messages de log écrits dans le fichier suivront le format défini par le formatter.
+
+Ajout du Handler de Fichiers au Logger :
+
+python
+Copy code
+logger.addHandler(file_handler)
+Ici, vous ajoutez le file_handler à votre objet logger. Cela signifie que le logger commencera à utiliser ce handler pour écrire des messages de log dans le fichier spécifié.
+
+Handler pour la Console :
+
+python
+Copy code
+console_handler = logging.StreamHandler()
+Un StreamHandler écrit les logs à un flux, qui est par défaut sys.stderr. Cela signifie que les messages de log apparaîtront dans la console où le script est exécuté.
+
+Configuration du Formatter pour le Handler de Console :
+
+python
+Copy code
+console_handler.setFormatter(formatter)
+Comme pour le file_handler, cette ligne applique le formatter au console_handler pour que les messages de log dans la console suivent le même format.
+
+Ajout du Handler de Console au Logger :
+
+python
+Copy code
+logger.addHandler(console_handler)
+Enfin, cette ligne ajoute le console_handler à l'objet logger, ce qui lui permet également d'écrire les messages de log à la console.
+
+Ensemble, ces configurations créent un système de logging qui écrit les messages à la fois dans un fichier et dans la console, en suivant un format unifié pour tous les messages.
