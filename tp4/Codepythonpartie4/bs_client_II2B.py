@@ -18,6 +18,16 @@ file_handler = logging.FileHandler(log_file_path)
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 
+class ErrorFilter(logging.Filter):
+    def filter(self, record):
+        return record.levelname == 'ERROR'
+
+console_handler = logging.StreamHandler()
+console_handler.addFilter(ErrorFilter())
+error_formatter = logging.Formatter('\033[91mERROR: %(message)s\033[0m')  # ANSI escape codes for red text
+console_handler.setFormatter(error_formatter)
+logger.addHandler(console_handler)
+
 # On définit la destination de la connexion
 host = '10.1.2.12'  # IP du serveur
 port = 13337        # Port choisi par le serveur
@@ -28,7 +38,7 @@ try:
 
     # Connexion au serveur
     s.connect((host, port))
-    print(f"Connecté avec succès au serveur {host} sur le port {port}")
+    logger.info(f"Connecté avec succès au serveur {host} sur le port {port}")
 
     # Demande à l'utilisateur ce qu'il veut envoyer
     message = input("Que veux-tu envoyer au serveur : ")
@@ -43,17 +53,19 @@ try:
 
     # Envoi du message après les vérifications
     s.sendall(message.encode())
+    logger.info(f"Message envoyé au serveur {host} : {message}")
 
     # On reçoit la réponse du serveur
     data = s.recv(1024).decode('utf-8')
-    print(f"Le serveur a répondu : {data}")
+    logger.info(f"Réponse reçue du serveur {host} : {data}")
+    
 
 except (TypeError, ValueError) as e:
-    print(f"Erreur lors de la saisie : {e}")
+    logger.error(f"Erreur lors de la saisie : {e}")
     sys.exit(1)
 
 except Exception as e:  # Pour les autres exceptions éventuelles
-    print(f"Une erreur est survenue: {e}")
+    logger.error(f"Impossible de se connecter au serveur {host} sur le port {port}.")
     sys.exit(1)
 
 finally:
