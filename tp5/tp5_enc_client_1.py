@@ -1,4 +1,5 @@
 import socket
+import re 
 
 def create_header_and_message(msg):
     # Calcul de la taille du message et création de l'en-tête (2 octets pour la taille)
