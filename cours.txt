@@ -185,4 +185,26 @@ Copy code
 logger.addHandler(console_handler)
 Enfin, cette ligne ajoute le console_handler à l'objet logger, ce qui lui permet également d'écrire les messages de log à la console.
 
+
+
 Ensemble, ces configurations créent un système de logging qui écrit les messages à la fois dans un fichier et dans la console, en suivant un format unifié pour tous les messages.
+
+La fonction struct.unpack dans Python est utilisée pour convertir des données codées (byte strings) en des types de données Python plus familiers et utilisables, comme des entiers ou des chaînes de caractères. Dans le contexte de votre fonction read_calculation, struct.unpack est utilisée pour décoder des données reçues via une connexion réseau (probablement TCP/IP).
+
+Voici comment cela fonctionne dans votre exemple :
+
+num1_bytes = conn.recv(4): Cette ligne reçoit 4 octets de la connexion et les stocke dans num1_bytes. Ces 4 octets représentent un entier.
+
+operator_byte = conn.recv(1): Cette ligne reçoit 1 octet, qui représente l'opérateur de l'opération (comme '+', '-', '*', '/').
+
+num2_bytes = conn.recv(4): Cette ligne reçoit encore 4 octets, représentant un second entier.
+
+struct.unpack('!I', num1_bytes)[0]: struct.unpack est utilisé ici avec le format !I, où ! indique un ordre des octets en réseau (big-endian) et I indique un entier non signé (unsigned integer). Cela convertit les 4 octets en un entier en Python. Le [0] à la fin extrait le nombre de la tuple retournée par struct.unpack.
+
+struct.unpack('!c', operator_byte)[0].decode(): Ici, struct.unpack utilise le format !c, où c représente un caractère. Cela convertit l'octet unique en un caractère. .decode() convertit ensuite ce caractère encodé en bytes en une chaîne de caractères (string) en Python.
+
+Enfin, la même méthode est utilisée pour convertir num2_bytes en un entier.
+
+En résumé, struct.unpack est essentiel pour interpréter des données binaires reçues sur une connexion réseau et les convertir en types de données utilisables en Python. Cela est particulièrement utile dans les applications réseau où les données doivent souvent être envoyées sous une forme compacte et standardisée.
+
+https://www.digitalocean.com/community/tutorials/python-struct-pack-unpack
