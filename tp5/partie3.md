@@ -14,3 +14,9 @@ Contenu de la réponse :
       x-data="{ isMobileNavOpen: false }" x-on:keydown.escape="isMobileNavOpen = false"
       :class="{ 'nav-is-open': isMobileNavOpen }">
 ```
+
+
+```
+[ranvin@Client bs_client]$ cat bs_clients.log
+2023-12-01 11:42:14,152:INFO:File served: www/index.html to ('127.0.0.1', 49828)
+```
