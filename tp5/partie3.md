@@ -3,6 +3,7 @@
 <h1>Hello, je suis un serveur HTTP</h1>
 ```
 
+je n'ai pas essayer sur internet je suis sur une vm je prèfére trafiquer sur une vm
 ```
 [ranvin@Client ~]$ python tp5_web_client_2.py
 http://127.0.0.1:13337) : https://www.ynov.com/
