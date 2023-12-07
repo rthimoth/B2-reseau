@@ -15,8 +15,8 @@ async def write_content(content, file):
         await f.write(content)
 
 async def main(url):
+    file_path = "web_page1.txt"  # Chemin pour Windows
     content = await get_content(url)
-    file_path = "web_page.txt"  # Chemin pour Windows
     await write_content(content, file_path)
     print(f"Contenu téléchargé et sauvegardé dans {file_path}")
 
