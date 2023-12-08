@@ -20,7 +20,6 @@ async def receive_message(reader):
 async def main():
     reader, writer = await asyncio.open_connection('127.0.0.1', 8888)
 
-    # Saisie du pseudo de l'utilisateur
     pseudo = input("Entrez votre pseudo: ")
     writer.write(f"Hello|{pseudo}".encode())
 
