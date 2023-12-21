@@ -3,7 +3,7 @@ import websockets
 import redis.asyncio as redis
 
 # Connexion au serveur Redis
-redis_client = redis.Redis(host="10.1.1.1", port=6379)
+redis_client = redis.Redis(host="10.1.2.12", port=6379)
 
 async def broadcast_message(message, exclude=None):
     clients = await redis_client.keys('*')  # Récupérer tous les clients

@@ -1,0 +1,17 @@
+{
+  "name": "tp7",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ws_i_2_client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "readline": "^1.3.0",
+    "redis": "^4.6.11",
+    "ws": "^8.15.1"
+  }
+}
